@@ -29,6 +29,8 @@ eduinequality [eduinequality <0] <- NA
 For the first part, when we regress education on democracy, we do not get a statistically significant result. Although this does not necessarily mean that the relationship is not practically significant. One reason this relationship might not be statistically significant is the presence of other factors that can affect the level of democracy in a country such as political stability, political history of a country and the effectiveness of checks and balance within the system. Furthermore, when we regress economic stability on education, we find that this relationship is statistically significant. This strengthens the argument that economic stability will be determined by the level of education in a country. In reality, this relationship is bidirectional and will have many confounders like population demographic, quality of basic amenities, access to basic infrastructure and amenities.
 
 Interestingly, regressing gender inequality in education (measured by V52- “a university education is more important for a boy than a girl) on economic stability, the relationship is statistically significant. This buttresses the argument for gender equality within the educational institutions because as gender inequality i.e. girls and boys are permitted and encouraged to gain higher education that will have a positive effect on the economic stability of the country because of the greater levels of discretionary income to take care of household needs and children.
+
+
 ```{r}
 summary(lm(stableco~education), data = WVS)
 summary(lm(education~democracy), data = WVS)
@@ -70,3 +72,5 @@ a <- plot_ly(data=WVS, z= ~educunequal, x= ~politunequal, y = ~happy, opacity = 
   add_markers(color = ~factor(WVS$V2A))
 a
 ```
+
+The graphs associated with each of the hyopthesis represents the intersection value for each of the relationships. The legend at the side of the graph represent the country codes for each respondent. The country codes can be found at the WVS website (worldvaluessurvey.org). 
