@@ -1,0 +1,72 @@
+---
+title: "Interpretation of Analysis"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("~/Desktop/BDS project")
+WVS <- readRDS("~/Downloads/BDS R chapters/F00007762-WV6_Data_R_v20180912.rds")
+education <- WVS$V248
+education[education<0] <- NA
+democracy <- WVS$V141
+democracy[democracy<0] <- NA
+politunequal <- WVS$V139
+politunequal[politunequal<0] <- NA
+library(ggplot2)
+library(dplyr)
+library(plotly)
+library(readr)
+stableco <- WVS$V188
+stableco [stableco <0] <- NA
+educunequal <- WVS$V52
+educunequal [educunequal < 0] <- NA
+happy <- WVS$V10
+happy [happy <0] <- NA
+eduinequality <- WVS$V52
+eduinequality [eduinequality <0] <- NA
+```
+
+## Hypothesis I
+For the first part, when we regress education on democracy, we do not get a statistically significant result. Although this does not necessarily mean that the relationship is not practically significant. One reason this relationship might not be statistically significant is the presence of other factors that can affect the level of democracy in a country such as political stability, political history of a country and the effectiveness of checks and balance within the system. Furthermore, when we regress economic stability on education, we find that this relationship is statistically significant. This strengthens the argument that economic stability will be determined by the level of education in a country. In reality, this relationship is bidirectional and will have many confounders like population demographic, quality of basic amenities, access to basic infrastructure and amenities.
+
+Interestingly, regressing gender inequality in education (measured by V52- “a university education is more important for a boy than a girl) on economic stability, the relationship is statistically significant. This buttresses the argument for gender equality within the educational institutions because as gender inequality i.e. girls and boys are permitted and encouraged to gain higher education that will have a positive effect on the economic stability of the country because of the greater levels of discretionary income to take care of household needs and children.
+```{r}
+summary(lm(stableco~education), data = WVS)
+summary(lm(education~democracy), data = WVS)
+summary(lm(stableco~education+democracy), data = WVS)
+summary(lm(educunequal~stableco), data = WVS)
+c <- plot_ly(data=WVS, z= ~stableco, x= ~education, y = ~democracy, opacity = 0.6) %>% 
+  add_markers(color = ~factor(WVS$V2A))
+c
+```
+
+## Hypothesis II 
+
+From Beer’s study, we inferred that there is a link between democracy and labor force participation because through voting, women are able to advance their interests through voting. We regressed the gender inequality in the political field on the level of educational attainment in the country. The results were statistically significant, and this is in line with the current literature that asserts the link between education and gender inequality in the political field. The results were also significant for gender inequality in the political field and democracy. Amongst other reasons, one reason, might be the lack of advancement of interests through voting. 
+
+```{r}
+summary(lm(politunequal~democracy), data = WVS)
+summary(lm(politunequal~education), data = WVS)
+summary(lm(politunequal~educunequal), data = WVS)
+summary(lm(politunequal~democracy + education + educunequal), data = WVS)
+b <- plot_ly(data=WVS, z= ~politunequal, x= ~democracy, y = ~educunequal, opacity = 0.6) %>%
+  add_markers(color = ~factor(WVS$V2A))
+b
+```
+
+## Hypothesis III
+
+Potts (2016) posits that it is the element of choice that makes people happy in liberal democracies. The equal choice offered to citizens in terms of participating in the political, social, education and employment institutions regardless of gender can have an association with the level of happiness that an individual in that country. 
+
+For this hypothesis, we used the dependent variable happiness (measured by V10 - feeling of happiness) and then the independent variables of gender inequality in the political field and gender inequality in the education. The results of the regression were statistically significant which reinforces the importance of gender equality in the educational and political field. 
+
+The relationship with the variable defined as gender inequality in the educational instituion ("educunequal") shows significance at the 95% confidence level. Although, this is a good level for statistical analysis, it is possible that relationship between happiness and the level of gender inequality in the educational field is confounded with other factors such as satisfaction with current situation, economic stability of the household, and access to basic amenities. 
+
+The correlation between happiness and choice in liberal democracies is well documented by scholars in the political science field. However, it is imperative for researchers to be mindful of their defintion of happiness. Happiness and satisfaction of life are not exhasutive measures for welfare. In measuring the welfare of citizens in liberal democracies, it is important to account for the definitions of good living and well-being according to different cultures and values. 
+```{r}
+summary(lm(happy~educunequal), data = WVS)
+summary(lm(happy~politunequal), data = WVS)
+summary(lm(happy~educunequal+politunequal), data = WVS)
+a <- plot_ly(data=WVS, z= ~educunequal, x= ~politunequal, y = ~happy, opacity = 0.6) %>% 
+  add_markers(color = ~factor(WVS$V2A))
+a
+```
