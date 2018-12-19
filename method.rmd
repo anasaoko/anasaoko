@@ -2,7 +2,6 @@
 title: "Methodology"
 ---
 
-
 The World Values Survey (WVS), which began in 1981, consists of nationally representative surveys using a common questionnaire conducted in approximately 100 countries--which make up some 90 percent of the world’s population. The WVS has become the largest non-commercial, cross- national, time series investigation of human beliefs and values ever conducted.
 
 It is interesting to note that findings from the WVS indicates gender equality is not a consequence of democratization but it is part of a broader cultural change that is transforming industrialized societies with mass demands for increasingly democratic institutions. As a consequence of these results, I believe that higher levels of gender inequality are prevalent in countries that have a large population of its citizens uneducated/unschooled. Also, the large population of uneducated citizens within a country has an association with how undemocratic a country is. To this effect, I will be testing hypotheses that will prove the association between gender inequality, level of democracy, educational attainment and economic stability. 
